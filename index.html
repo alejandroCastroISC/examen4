@@ -317,10 +317,7 @@ var btnGuarDatos=$("#btnGuarDatos");
     }	
     
         function obtenerMarcas(){
-	  var opciones={maximumAge:500000,enableHighAccuracy:true,timeout:5000};
-	  navigator.geolocation.getCurrentPosition(exito, falla, opciones);
-	  if(navigator.geolocation){	
-	    function exito(posic){	      	      	         	     
+	 	      	      	         	     
 	      $.ajax({
 		type:"POST",
 		url:"http://alexcastroisc.260mb.net/consultaBD.php",
@@ -342,19 +339,13 @@ var btnGuarDatos=$("#btnGuarDatos");
 	      }
 	    }
 	 }
-	    function falla(error){
-	      alert("Error en el servicio Geolocalizador");
-	      dibujarMarcas(defaultPos);
-	    }
+	    
 	  	      
-	    }else{
-	      dibujarMarcas(defaultPos);
-	    }
-	}
+	  
                 
     
 function dibujarMarcas(nombre, municipio, direccion, giro, fotografia, altitud, latitud){//habilitar esta función
- 
+ alert("si llego: Lat:"+altitud+" Long:"+latitud+" Fotografia: "+fotografia );
          var latlng=new google.maps.LatLng(altitud,latitud);
   	 	  
 	  var marca2=new google.maps.Marker({
@@ -367,7 +358,7 @@ function dibujarMarcas(nombre, municipio, direccion, giro, fotografia, altitud, 
 	  var infoVentanta2=new google.maps.InfoWindow({
 	    position:latlng,
 	    //content:"<p>Tu posicion actual es: </p>"+latlng
-	    content:'<div style="width:200px; height:160px;"><div style="text-align: center; color:#5c041b; font-weight:bolder; font-size:12px; font-family:arial;">' + nombre + '</div><img src="'+ruta+'" width="100" heigth="60" /><div style="text-align:center; color: #2e20b8; font-size:12px; font-family:arial; width:200px; text-align:center;">' + dir + '</div><div>Tel: ' + tel + '</div><div>Email:' + mail + '</div>'
+	    content:'<div style="width:200px; height:160px;"><div style="text-align: center; color:#5c041b; font-weight:bolder; font-size:12px; font-family:arial;">' + nombre + '</div><img src="http://martha13valadez.260mb.net/'+fotografia+'" width="100" heigth="60" /><div style="text-align:center; color: #2e20b8; font-size:12px; font-family:arial; width:200px; text-align:center;">' + municipio + '</div><div>Dirección: ' + direccion + '</div><div>Giro:' + giro+ '</div>'
 	  });
 	  google.maps.event.addListener(marca2, "click", function(){infoVentanta2.open(map,this);});
     }     
@@ -574,21 +565,21 @@ function dibujarMarcas(nombre, municipio, direccion, giro, fotografia, altitud, 
                 <li><input type="text" id="giro" placeholder="Giro" /></li>
                
                 <input type="button" id="btnTomarFoto" value="Tomar Foto" >
-		<li><div id="RegFoto"></div></li>
+                
+		<li><div id="regFoto"></div></li>
                 <li><input type="tel" id="txtlat" placeholder="latitud" /></li>
                 <li><input type="tel" id="txtlong" placeholder="Altitud" /></li>
                 <input type="button" id="btnObtener" value="Obtener coordenadas" />
 	  <input type="button" id="guardar" value="Guardar Servicio" />
-              
-              
+                </ul>
             </div>
             
-            
-            
-            <div data-role="footer">
-                <a href="#principal" data-role="button" data-add-back-btn="true" data-icon="home">Regresar Al Menú</a>
-                <p>Derechos reservados</p>
+            <div data-role="footer" data-position="fixed" style="text-align:center;">
+	<div data-role="controlgroup" data-type="horizontal">
+	  <a href="#principal" class="ui-btn ui-icon-home ui-btn-icon-left">Regresar</a>
                
+                <p>Derechos reservados</p>
+        </div>
             </div>
         </div>
         <!--CONSULTA TODOS---->
